@@ -2,6 +2,7 @@ package cloudflare
 
 import (
 	"encoding/json"
+	"strings"
 	"time"
 
 	"github.com/libdns/libdns"
@@ -119,13 +120,17 @@ func (r cfDNSRecord) libdnsRecord(zone string) libdns.Record {
 }
 
 func cloudflareRecord(r libdns.Record) cfDNSRecord {
-	return cfDNSRecord{
+	dr := cfDNSRecord{
 		ID:      r.ID,
 		Type:    r.Type,
 		Name:    r.Name,
 		Content: r.Value,
 		TTL:     int(r.TTL.Seconds()),
 	}
+	if (r.Type == "A" || r.Type == "AAAA" || r.Type == "CNAME") && !strings.Contains(r.Name, "*") && dr.TTL == 1 {
+		dr.Proxied = true
+	}
+	return dr
 }
 
 // All API responses have this structure.
