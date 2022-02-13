@@ -2,6 +2,7 @@ package cloudflare
 
 import (
 	"encoding/json"
+	"fmt"
 	"strings"
 	"time"
 
@@ -130,6 +131,9 @@ func cloudflareRecord(r libdns.Record) cfDNSRecord {
 	if (r.Type == "A" || r.Type == "AAAA" || r.Type == "CNAME") && !strings.Contains(r.Name, "*") && dr.TTL == 1 {
 		dr.Proxied = true
 	}
+
+	fmt.Println("DNS record: ", dr)
+
 	return dr
 }
 
