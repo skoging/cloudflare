@@ -1,4 +1,4 @@
-module github.com/libdns/cloudflare
+module github.com/skoging/cloudflare
 
 go 1.14
 

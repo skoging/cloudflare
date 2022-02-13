@@ -5,6 +5,14 @@ Cloudflare for `libdns`
 
 This package implements the [libdns interfaces](https://github.com/libdns/libdns) for [Cloudflare](https://www.cloudflare.com).
 
+## Forked from [libdns/cloudflare](/libdns/cloudflare)
+
+This fork tries to let Cloudflare do proxying when it's reasonable(A, AAAA or CNAME with 1s TTL (auto)).
+
+This is useful if you use this libaray in conjunction with caddy-dynamicdns
+
+Based on [caiych/cloudflare](/caiych/cloudflare) with some additions
+
 ## Authenticating
 
 This package supports API **token** authentication.
