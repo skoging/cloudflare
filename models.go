@@ -127,7 +127,7 @@ func cloudflareRecord(r libdns.Record) cfDNSRecord {
 		Content: r.Value,
 		TTL:     int(r.TTL.Seconds()),
 	}
-	if (r.Type == "A" || r.Type == "AAAA") && !strings.Contains(r.Name, "*") {
+	if (r.Type == "A" || r.Type == "AAAA" || r.Type == "CNAME") && !strings.Contains(r.Name, "*") && dr.TTL == 1 {
 		dr.Proxied = true
 	}
 	return dr
